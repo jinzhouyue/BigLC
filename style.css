@@ -25,15 +25,11 @@
 
 * { box-sizing: border-box; }
 
-/* hidden 属性必须真的隐藏。
-   浏览器默认只给 [hidden] { display: none }（权重 0,1,0），
-   一旦某个类也写了 display（比如 .revive-chip { display: inline-flex }），
-   同权重、后写的赢 —— hidden 就静默失效了，元素还挂在那儿。 */
 [hidden] { display: none !important; }
 
 html, body {
   height: 100%;
-  overscroll-behavior: none;   /* 禁掉下拉刷新 / 橡皮筋 */
+  overscroll-behavior: none;   
 }
 
 body {
@@ -50,12 +46,10 @@ body {
   display: grid;
   place-items: center;
   overflow: hidden;
-  touch-action: manipulation;          /* 干掉双击缩放 */
+  touch-action: manipulation;       
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
 }
-
-/* ---------------- 布局 ---------------- */
 
 .app {
   display: flex;
@@ -91,7 +85,6 @@ body {
   height: 100%;
 }
 
-/* ---------------- 结束遮罩 ---------------- */
 
 .overlay {
   position: absolute;
@@ -161,7 +154,6 @@ body {
   color: var(--ink-soft);
 }
 
-/* ---------------- 赞助作者弹窗 ---------------- */
 
 .sponsor-body {
   overflow-y: auto;
@@ -193,10 +185,6 @@ body {
   color: var(--ink-soft);
 }
 
-/* 结算弹窗里的「赏作者一包辣条」：要一眼看到，但别跟主按钮抢
-   —— 用琥珀金（跟珊瑚红的主按钮区分开），加一道缓慢扫过的光，再叠一点亮度呼吸。
-   注意选择器写成 .btn.btn-sponsor：这段在源码里排在 .btn 之前，
-   单靠 .btn-sponsor 会被后面的 .btn 同权重覆盖掉。 */
 .btn.btn-sponsor {
   position: relative;
   overflow: hidden;
@@ -215,7 +203,6 @@ body {
 }
 .btn.btn-sponsor:active { transform: translateY(1px) scale(.99); }
 
-/* 一道光周期性地扫过去，提示「这里可以点」 */
 .btn-sponsor::after {
   content: "";
   position: absolute;
@@ -242,7 +229,6 @@ body {
   .btn.btn-sponsor, .btn-sponsor::after { animation: none; }
 }
 
-/* ---------------- 侧边面板 ---------------- */
 
 .panel {
   width: min(312px, 86vw);
@@ -304,9 +290,6 @@ body {
 
 .stat-best { color: #e79a1f; }
 
-/* 复活币：浮在棋盘左上角的小胶囊。
-   刻意不放进 .stats —— 手机上面板是横向 flex，多一个卡片会把分数卡挤到
-   52px 宽还折行（实测面板从 66px 涨到 102px，整个版式被顶开）。 */
 .revive-chip {
   position: absolute;
   left: 10px;
@@ -324,7 +307,7 @@ body {
   color: #6a3c00;
   background: linear-gradient(135deg, #ffe6a3, #ffc247);
   box-shadow: 0 3px 10px rgba(200, 130, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .75);
-  pointer-events: none;          /* 绝不挡住投放 */
+  pointer-events: none;          
   user-select: none;
   -webkit-user-select: none;
 }
@@ -339,7 +322,6 @@ body {
   100% { transform: scale(1); }
 }
 
-/* 合成表底下那行规则说明 */
 .chain-note {
   margin: 6px 0 0;
   font-size: 11.5px;
@@ -349,7 +331,6 @@ body {
 }
 .chain-note strong { color: #c8601a; }
 
-/* 越线那一屏 */
 .revive-ask .dialog-score { margin-bottom: 10px; }
 
 .revive-hint {
@@ -363,7 +344,6 @@ body {
   box-shadow: inset 0 0 0 1px rgba(214, 160, 96, .25);
 }
 
-/* 「用一枚复活币」：青绿色，跟珊瑚红的主按钮区分开 */
 .btn.btn-revive {
   color: #fff;
   border-color: transparent;
@@ -385,7 +365,6 @@ body {
   100% { transform: scale(1); }
 }
 
-/* 下一个 / 合成表 */
 
 .box-label {
   display: block;
@@ -416,7 +395,6 @@ body {
   height: auto;
 }
 
-/* 按钮 */
 
 .actions {
   display: grid;
@@ -453,7 +431,6 @@ body {
   background: linear-gradient(135deg, #ff8a5b, var(--brand) 55%, var(--brand-dark));
 }
 
-/* ---------------- 结束弹窗里的结算区 ---------------- */
 
 .submit-box {
   margin: 0 0 14px;
@@ -563,7 +540,6 @@ body {
   gap: 10px;
 }
 
-/* ---------------- 排行榜弹窗 ---------------- */
 
 .modal {
   position: fixed;
@@ -715,12 +691,10 @@ body {
 
 /* ============================================================
    响应式：手机 / 竖屏窄屏
-   思路：面板拆成「顶部信息条」——把 .panel 提到棋盘上方并横向压扁，
-   只留分数 + 按钮；棋盘按剩余高度和 96vw 取小值，永远不出现滚动条。
    ============================================================ */
 
 @media (max-width: 860px) {
-  :root { --topbar: 68px; }   /* 顶部信息条 + 间隙的大致占高 */
+  :root { --topbar: 68px; }  
 
   body {
     padding: calc(8px + var(--safe-t)) calc(8px + var(--safe-r))
@@ -730,19 +704,15 @@ body {
   .app {
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;   /* 信息条钉在顶上 */
+    justify-content: flex-start;   
     gap: 8px;
     width: 100%;
     height: 100%;
     max-height: none;
   }
 
-  /* 面板是 DOM 里靠后的，用 order 提到棋盘上面 */
   .panel { order: -1; }
 
-  /* 棋盘：高度取「剩余可用高度」与「96vw 按比例换算的高度」中较小的一个，
-     宽度由 aspect-ratio 反推，保证不拉伸、不溢出；
-     margin:auto 让它在剩下的空间里垂直居中 */
   .stage {
     margin: auto 0;
     height: min(calc(var(--vh) - var(--topbar) - 28px - var(--safe-t) - var(--safe-b)),
@@ -752,7 +722,6 @@ body {
     border-radius: 20px;
   }
 
-  /* ---- 顶部信息条 ---- */
   .panel {
     flex-direction: row;
     align-items: stretch;
@@ -800,7 +769,6 @@ body {
     gap: 6px;
   }
 
-  /* 触摸目标够大，别让人点不中 */
   .btn {
     min-height: 46px;
     padding: 0 12px;
@@ -809,7 +777,6 @@ body {
     white-space: nowrap;
   }
 
-  /* 手机上「排行榜 / 音效」只留图标，把横向空间让给分数 */
   #boardBtn .lbl,
   #soundBtn .lbl { display: none; }
 
@@ -821,7 +788,6 @@ body {
 
   #boardBtn .ico, #soundBtn .ico { margin-right: 0; }
 
-  /* ---- 结束弹窗 ---- */
   .overlay { padding: 14px; }
 
   .dialog {
@@ -852,7 +818,6 @@ body {
   .dialog-hint { font-size: 11px; }
 }
 
-/* 手机横屏 / 矮屏：回到左右布局，棋盘吃满高度 */
 @media (max-width: 860px) and (orientation: landscape) {
   .app {
     flex-direction: row;
@@ -881,7 +846,6 @@ body {
   .stat-value { font-size: 18px; }
 }
 
-/* 小屏手机（iPhone SE 等 375 以下）：再压一档，保证一行放得下 */
 @media (max-width: 380px) {
   .panel { padding: 6px 8px; gap: 6px; }
 
@@ -898,14 +862,12 @@ body {
   #boardBtn, #soundBtn { min-width: 42px; font-size: 16px; }
 }
 
-/* 顶部信息条在横屏下是竖排的，恢复成图标 + 文字 */
 @media (max-width: 860px) and (orientation: landscape) {
   #boardBtn, #soundBtn { min-width: 0; padding: 0 10px; font-size: 13px; }
   #boardBtn .lbl, #soundBtn .lbl { display: inline; }
   #boardBtn .ico, #soundBtn .ico { margin-right: 4px; }
 }
 
-/* 很矮的横屏（手机横过来且高度不足 430px）：进一步压缩 */
 @media (max-width: 860px) and (orientation: landscape) and (max-height: 430px) {
   .stat-label { display: none; }
   .stat { padding: 4px 8px; }
@@ -913,7 +875,6 @@ body {
   .btn { min-height: 40px; padding: 0 10px; font-size: 13px; }
 }
 
-/* 桌面端矮窗口 */
 @media (max-height: 620px) and (min-width: 861px) {
   .stage { height: 92vh; }
   .chain-box { display: none; }
